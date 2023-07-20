@@ -108,7 +108,7 @@ function AsideLeft(props) {
 
             {/* 100109: 暗黑按钮靠左对齐 */}
             {/* <section className='flex justify-center dark:text-gray-200 pt-4'> */}
-            <section className='flex justify-center dark:text-gray-200 pt-4'>
+            <section className='flex justify-left dark:text-gray-200 pt-4'>
                 <DarkModeButton />
             </section>
 

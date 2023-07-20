@@ -96,7 +96,7 @@ export default function ArticleDetail(props) {
           {post && noContent && (
           <div id="container" class="mx-auto">
             <figure class="notion-asset-wrapper notion-asset-wrapper-image">
-              <div>
+              <div id="notion-article">
                 <img alt={post.title} src={post?.pageCover} className='object-center w-full' />
               </div>
             </figure>
