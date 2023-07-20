@@ -127,9 +127,18 @@ export async function getStaticProps({ params: { slug } }) {
   if (!props?.posts?.blockMap) {
     props.post.blockMap = await getPostBlocks(props.post.id, from)
   }
-
   // 推荐关联文章处理
-  const allPosts = props.allPages.filter(page => page.type === 'Post' && page.status === 'Published')
+  // const allPosts = props.allPages.filter(page => page.type === 'Post' && page.status === 'Published')
+  // 推荐关联文章处理(要求只查询同一个分类的)(先按日期排序，再按标题排序（经过测试无法对中文数字进行排序）)
+  const allPosts = props.allPages.filter(page => page.type === 'Post' && page.status === 'Published' && page.category?.some(item => props.post.category?.includes(item)))
+    .sort((a, b) => {
+      const dateComparison = new Date(a.publishTime) - new Date(b.publishTime)
+      if (dateComparison !== 0) {
+        return dateComparison
+      }
+      return a.title.localeCompare(b.title)
+    })
+
   if (allPosts && allPosts.length > 0) {
     const index = allPosts.indexOf(props.post)
     props.prev = allPosts.slice(index - 1, index)[0] ?? allPosts.slice(-1)[0]
