@@ -127,7 +127,7 @@ export async function getStaticProps({ params: { slug } }) {
   if (!props?.posts?.blockMap) {
     props.post.blockMap = await getPostBlocks(props.post.id, from)
   }
-  // 推荐关联文章处理
+  // 100101: 修改上一页/下一页算法
   // const allPosts = props.allPages.filter(page => page.type === 'Post' && page.status === 'Published')
   // 推荐关联文章处理(要求只查询同一个分类的)(先按日期排序，再按标题排序（经过测试无法对中文数字进行排序）)
   const allPosts = props.allPages.filter(page => page.type === 'Post' && page.status === 'Published' && page.category?.some(item => props.post.category?.includes(item)))
