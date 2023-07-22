@@ -36,10 +36,17 @@
 .font-light {
     font-weight: unset;
 }
+
+/* 给所有的标题加个下活线 */
+#container .notion-h {
+    border-bottom-width: 1 !important;
+}
+
 /* 取消H1标题的下划线，因为重复了。 */
 #container .notion-h1 {
     border-bottom-width: 0 !important;
 }
+
 /* 图片默认100%宽度*/
 .notion-asset-wrapper img {
     width: 100%;
@@ -49,6 +56,11 @@
 /* 给代码框加上阴影 */
 .notion .notion-code {
     box-shadow: 3px 3px 5px 0px #ccc;
+}
+
+/* 给代码框微调 */
+.code-toolbar {
+    margin-top: 0.25rem !important;
 }
 
 /* 嵌套 ul 就不要缩进了*/
