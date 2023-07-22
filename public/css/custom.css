@@ -51,7 +51,7 @@
     box-shadow: 3px 3px 5px 0px #ccc;
 }
 
-/* li ul */
-.notion-list-disc {
-    padding-inline-start: initial;
+/* 嵌套 ul 就不要缩进了*/
+ul ul {
+    padding-inline-start: initial !important;
 }
