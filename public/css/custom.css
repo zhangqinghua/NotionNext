@@ -38,12 +38,12 @@
 }
 
 /* 给所有的标题加个下活线 */
-#container .notion-h {
+.notion-h {
     border-bottom-width: 1 !important;
 }
 
 /* 取消H1标题的下划线，因为重复了。 */
-#container .notion-h1 {
+.notion-h1 {
     border-bottom-width: 0 !important;
 }
 
