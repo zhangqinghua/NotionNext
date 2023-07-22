@@ -50,3 +50,8 @@
 .notion .notion-code {
     box-shadow: 3px 3px 5px 0px #ccc;
 }
+
+/* li ul */
+.notion-list-disc {
+    padding-inline-start: initial;
+}
