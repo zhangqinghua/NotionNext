@@ -14,7 +14,7 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "rm -rf ./data.json && next build",
     "start": "next start",
     "post-build": "next-sitemap --config next-sitemap.config.js",
     "export": "next build && next-sitemap --config next-sitemap.config.js && next export",
@@ -27,6 +27,8 @@
     "@vercel/analytics": "^1.0.0",
     "animejs": "^3.2.1",
     "aos": "^3.0.0-beta.6",
+    "async-lock": "^1.4.0",
+    "async-mutex": "^0.4.0",
     "axios": ">=0.21.1",
     "copy-to-clipboard": "^3.3.1",
     "eslint-plugin-react-hooks": "^4.6.0",
