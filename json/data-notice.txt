@@ -1,0 +1,26 @@
+ {
+  block: {
+    'e54928bc-73b8-477d-a088-e7da8194aa63': { value: [Object], role: 'read_and_write' },
+    '395cd28c-4c9b-4428-88de-c72d8090372b': { value: [Object], role: 'read_and_write' },
+    'cfc9a844-a4f3-4799-8fb8-4213fe9f7422': { value: [Object], role: 'read_and_write' },
+    '77821b2e-80f4-4cd5-9453-f78a02ba1085': { value: [Object], role: 'read_and_write' },
+    '29030eb2-ec42-4f63-8a95-0930dc010875': { value: [Object], role: 'read_and_write' },
+    '17cb60f0-ba8d-4e5f-9fba-0b811ee75045': { value: [Object], role: 'read_and_write' },
+    '04ba90c1-1ce1-41ac-8a1c-372527f6fbbd': { value: [Object], role: 'read_and_write' },
+    'ce4ce1af-525b-4594-a148-5346def242f6': { value: [Object], role: 'read_and_write' },
+    '84ec803a-a87a-48da-8275-c0216fea0081': { value: [Object], role: 'read_and_write' }
+  },
+  collection: {
+    'a11bbb23-3346-4bc6-9917-018e50988f8c': { value: [Object], role: 'read_and_write' }
+  },
+  space: {},
+  collection_view: {
+    'ab3d732e-a8a5-42a8-bd24-c02af35af9e4': { value: [Object], role: 'read_and_write' },
+    '1670ff0d-25f3-4759-945a-9230a0b2c157': { value: [Object], role: 'read_and_write' },
+    'e07df880-25fc-45ba-81e0-39ed9b85f64c': { value: [Object], role: 'read_and_write' },
+    '5425ce5f-d3b9-4f92-bcba-fe5cb193e9f7': { value: [Object], role: 'read_and_write' }
+  },
+  notion_user: {},
+  collection_query: {},
+  signed_urls: {}
+}

@@ -1,0 +1,19 @@
+{
+    block: {
+      '8ae8ca4f-634f-4055-bad2-19369d3d3a02': { value: [Object], role: 'read_and_write' },
+      '395cd28c-4c9b-4428-88de-c72d8090372b': { value: [Object], role: 'read_and_write' }
+    },
+    collection: {
+      'a11bbb23-3346-4bc6-9917-018e50988f8c': { value: [Object], role: 'read_and_write' }
+    },
+    space: {},
+    collection_view: {
+      'ab3d732e-a8a5-42a8-bd24-c02af35af9e4': { value: [Object], role: 'read_and_write' },
+      '1670ff0d-25f3-4759-945a-9230a0b2c157': { value: [Object], role: 'read_and_write' },
+      'e07df880-25fc-45ba-81e0-39ed9b85f64c': { value: [Object], role: 'read_and_write' },
+      '5425ce5f-d3b9-4f92-bcba-fe5cb193e9f7': { value: [Object], role: 'read_and_write' }
+    },
+    notion_user: {},
+    collection_query: {},
+    signed_urls: {}
+  }
