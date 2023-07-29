@@ -68,9 +68,10 @@ export async function getStaticProps({ params: { prefix, slug } }) {
   if (BLOG.ALGOLIA_APP_ID) {
     uploadDataToAlgolia(props?.post)
   }
-
   // 推荐关联文章处理
-  const allPosts = props.allPages.filter(page => page.type === 'Post' && page.status === 'Published')
+  // const allPosts = props.allPages.filter(page => page.type === 'Post' && page.status === 'Published')
+  // 100101: 修改上一页/下一页算法 推荐关联文章处理(要求只查询同一个分类的)(先按日期排序，再按标题排序（经过测试无法对中文数字进行排序）)
+  const allPosts = props.allPages.filter(page => page.type === 'Post' && page.status === 'Published' && page.category === props.post.category)
   if (allPosts && allPosts.length > 0) {
     const index = allPosts.indexOf(props.post)
     props.prev = allPosts.slice(index - 1, index)[0] ?? allPosts.slice(-1)[0]
