@@ -14,7 +14,7 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "rm -rf ./data.json && next build",
     "start": "next start",
     "post-build": "next-sitemap --config next-sitemap.config.js",
     "export": "next build && next-sitemap --config next-sitemap.config.js && next export",

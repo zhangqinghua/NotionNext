@@ -22,3 +22,15 @@
 ## 3. 添加自定义样式
 - public/css/custom.css 
 - public/font/*
+
+## 4. Notion API 改动
+#### mapImage
+- 不是封面，也一并压缩，900px
+#### getPageProperties.js
+全部
+#### getNotionData
+全部
+#### getAllTages
+全部
+#### getAllCategory
+全部
