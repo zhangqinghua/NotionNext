@@ -34,3 +34,10 @@
 全部
 #### getAllCategory
 全部
+
+## 5. 缓存
+
+#### local_file_cache
+- 文件缓存持续10分钟
+#### memory_manager.js
+- 使用文件缓存，因为内存缓存好像有并发Bug
