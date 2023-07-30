@@ -16,6 +16,7 @@ import { getLayoutByTheme } from '@/themes/theme'
 const Index = props => {
   // 根据页面路径加载不同Layout文件
   const Layout = getLayoutByTheme(useRouter())
+  console.log('================================================Index')
   return <Layout {...props} />
 }
 

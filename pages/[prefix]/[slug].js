@@ -12,6 +12,7 @@ import { uploadDataToAlgolia } from '@/lib/algolia'
  * @returns
  */
 const PrefixSlug = props => {
+  console.log('============================PrefixSlug start')
   return <Slug {...props}/>
 }
 

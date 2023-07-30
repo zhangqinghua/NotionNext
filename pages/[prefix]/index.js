@@ -18,6 +18,9 @@ import { uploadDataToAlgolia } from '@/lib/algolia'
  */
 const Slug = props => {
   const { post, siteInfo } = props
+
+  console.log('============================post: ', post)
+
   const router = useRouter()
 
   // 文章锁🔐

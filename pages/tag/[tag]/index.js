@@ -30,8 +30,12 @@ const Tag = props => {
 
 export async function getStaticProps({ params: { tag } }) {
   const from = 'tag-props'
+
+  console.log('========================================================getStaticProps tag-props get data start')
+
   const props = await getGlobalData({ from })
 
+  console.log('========================================================getStaticProps tag-props get data finish')
   // 过滤状态
   props.posts = props.allPages.filter(page => page.type === 'Post' && page.status === 'Published').filter(post => post && post?.tags && post?.tags.includes(tag))
 
