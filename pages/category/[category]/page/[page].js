@@ -72,7 +72,7 @@ export async function getStaticPaths() {
       }
     }
   })
-
+  console.log('============================category page getStaticPaths return: ', paths)
   return {
     paths,
     fallback: true
