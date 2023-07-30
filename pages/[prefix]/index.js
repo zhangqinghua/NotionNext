@@ -12,7 +12,7 @@ import { isBrowser } from '@/lib/utils'
 import { uploadDataToAlgolia } from '@/lib/algolia'
 
 /**
- * 根据notion的slug访问页面
+ * 根据notion的slug访 问页面
  * @param {*} props
  * @returns
  */
