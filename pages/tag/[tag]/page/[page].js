@@ -45,6 +45,7 @@ export async function getStaticProps({ params: { tag, page } }) {
 export async function getStaticPaths() {
   const from = 'tag-page-static-path'
   const { tagOptions, allPages } = await getGlobalData({ from })
+  console.log('============================tag page getStaticPaths')
   const paths = []
   tagOptions?.forEach(tag => {
     // 过滤状态类型

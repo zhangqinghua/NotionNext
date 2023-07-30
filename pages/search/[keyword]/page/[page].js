@@ -51,6 +51,7 @@ export async function getStaticProps({ params: { keyword, page } }) {
 }
 
 export async function getStaticPaths() {
+  console.log('============================keyword [page] getStaticPaths')
   return {
     paths: [{ params: { keyword: BLOG.TITLE, page: '1' } }],
     fallback: true

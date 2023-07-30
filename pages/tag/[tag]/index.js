@@ -73,6 +73,7 @@ function getTagNames(tags) {
 export async function getStaticPaths() {
   const from = 'tag-static-path'
   const { tagOptions } = await getGlobalData({ from })
+  console.log('============================tag [tag] getStaticPaths')
   const tagNames = getTagNames(tagOptions)
 
   return {

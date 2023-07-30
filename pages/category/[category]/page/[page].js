@@ -58,6 +58,7 @@ export async function getStaticPaths() {
   const from = 'category-paths'
   const { categoryOptions, allPages } = await getGlobalData({ from })
   const paths = []
+  console.log('============================category page getStaticPaths')
 
   categoryOptions?.forEach(category => {
     // 过滤状态类型

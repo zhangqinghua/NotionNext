@@ -17,6 +17,7 @@ const PrefixSlug = props => {
 }
 
 export async function getStaticPaths() {
+  console.log('============================slug getStaticPaths')
   if (!BLOG.isProd) {
     return {
       paths: [],

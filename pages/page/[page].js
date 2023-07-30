@@ -31,6 +31,7 @@ const Page = props => {
 export async function getStaticPaths() {
   const from = 'page-paths'
   const { postCount } = await getGlobalData({ from })
+  console.log('============================page page getStaticPaths')
   const totalPages = Math.ceil(postCount / BLOG.POSTS_PER_PAGE)
   return {
     // remove first page, we 're not gonna handle that.
