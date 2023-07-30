@@ -80,6 +80,7 @@ const Slug = props => {
 }
 
 export async function getStaticPaths() {
+  console.log('========================index.js getStaticPaths')
   if (!BLOG.isProd) {
     return {
       paths: [],
@@ -89,6 +90,7 @@ export async function getStaticPaths() {
 
   const from = 'slug-paths'
   const { allPages } = await getGlobalData({ from })
+  console.log('========================index.js getStaticPaths return')
   return {
     paths: allPages?.filter(row => row.slug.indexOf('/') < 0).map(row => ({ params: { prefix: row.slug } })),
     fallback: true
