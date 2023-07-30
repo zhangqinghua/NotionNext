@@ -94,10 +94,12 @@ export async function getStaticPaths() {
   const from = 'slug-paths'
   const { allPages } = await getGlobalData({ from })
   console.log('========================index.js getStaticPaths retur n')
-  return {
+  const paths = {
     paths: allPages?.filter(row => row.slug.indexOf('/') < 0).map(row => ({ params: { prefix: row.slug } })),
     fallback: true
   }
+  console.log('========================index.js getStaticPaths return: ', paths.paths)
+  return paths
 }
 
 export async function getStaticProps({ params: { prefix } }) {

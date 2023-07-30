@@ -33,13 +33,15 @@ export async function getStaticPaths() {
   const { postCount } = await getGlobalData({ from })
   console.log('============================page page getStaticPaths')
   const totalPages = Math.ceil(postCount / BLOG.POSTS_PER_PAGE)
-  return {
+  const paths = {
     // remove first page, we 're not gonna handle that.
     paths: Array.from({ length: totalPages - 1 }, (_, i) => ({
       params: { page: '' + (i + 2) }
     })),
     fallback: true
   }
+  console.log('========================index.js getStaticPaths return: ', paths.paths)
+  return paths
 }
 
 export async function getStaticProps({ params: { page } }) {

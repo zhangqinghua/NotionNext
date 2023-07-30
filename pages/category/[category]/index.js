@@ -63,10 +63,12 @@ export async function getStaticPaths() {
   const from = 'category-paths'
   const { categoryOptions } = await getGlobalData({ from })
   console.log('============================category index getStaticPaths')
-  return {
+  const paths = {
     paths: Object.keys(categoryOptions).map(category => ({
       params: { category: categoryOptions[category]?.name }
     })),
     fallback: true
   }
+  console.log('========================index.js getStaticPaths return: ', paths.paths)
+  return paths
 }

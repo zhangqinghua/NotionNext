@@ -76,12 +76,14 @@ export async function getStaticPaths() {
   console.log('============================tag [tag] getStaticPaths')
   const tagNames = getTagNames(tagOptions)
 
-  return {
+  const paths = {
     paths: Object.keys(tagNames).map(index => ({
       params: { tag: tagNames[index] }
     })),
     fallback: true
   }
+  console.log('========================index.js getStaticPaths return: ', paths.paths)
+  return paths
 }
 
 export default Tag

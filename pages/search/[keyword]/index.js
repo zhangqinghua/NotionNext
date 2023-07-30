@@ -54,10 +54,12 @@ export async function getStaticProps({ params: { keyword } }) {
 
 export async function getStaticPaths() {
   console.log('============================keyword page getStaticPaths')
-  return {
+  const paths = {
     paths: [{ params: { keyword: BLOG.TITLE } }],
     fallback: true
   }
+  console.log('========================index.js getStaticPaths return: ', paths.paths)
+  return paths
 }
 
 /**

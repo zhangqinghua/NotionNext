@@ -59,6 +59,7 @@ export async function getStaticPaths() {
       }
     }
   })
+  console.log('========================index.js getStaticPaths return: ', paths.paths)
   return {
     paths: paths,
     fallback: true
