@@ -23,7 +23,9 @@
   "dependencies": {
     "@giscus/react": "^2.2.6",
     "@headlessui/react": "^1.7.15",
+    "@nestjs/schedule": "^3.0.1",
     "@next/bundle-analyzer": "^12.1.1",
+    "@types/cron": "^2.0.1",
     "@vercel/analytics": "^1.0.0",
     "algoliasearch": "^4.18.0",
     "animejs": "^3.2.1",
@@ -38,6 +40,7 @@
     "memory-cache": "^0.2.0",
     "mongodb": "^4.6.0",
     "next": "13.3.1",
+    "node-cron": "^3.0.2",
     "notion-client": "6.15.6",
     "notion-utils": "6.15.6",
     "nprogress": "^0.2.0",
