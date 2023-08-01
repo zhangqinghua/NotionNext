@@ -15,8 +15,9 @@ import { getLayoutByTheme } from '@/themes/theme'
 
 const Index = props => {
   // 根据页面路径加载不同Layout文件
+  console.log('================================================Index start')
   const Layout = getLayoutByTheme(useRouter())
-  console.log('================================================Index')
+  console.log('================================================Index finish')
   return <Layout {...props} />
 }
 
@@ -26,8 +27,9 @@ const Index = props => {
  */
 export async function getStaticProps() {
   const from = 'index'
+  console.log('SSG 获取数据 index.js getStaticProps start')
   const props = await getGlobalData({ from })
-
+  console.log('index.js getStaticProps finish')
   const { siteInfo } = props
   props.posts = props.allPages.filter(page => page.type === 'Post' && page.status === 'Published')
 

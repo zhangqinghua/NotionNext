@@ -28,6 +28,7 @@ export const getLayoutByTheme = (router) => {
  * @returns
  */
 export const getLayoutNameByPath = (path) => {
+  console.log('根据路径 获取对应的layout: ', path)
   switch (path) {
     case '/':
       return 'LayoutIndex'
