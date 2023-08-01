@@ -62,7 +62,8 @@ export async function getStaticProps({ params: { category } }) {
 export async function getStaticPaths() {
   const from = 'category-paths'
   const { categoryOptions } = await getGlobalData({ from })
-  console.log('============================category index getStaticPaths')
+  console.log('============================category index getStaticPaths: ', categoryOptions)
+  console.log('============================category index getStaticPaths: ', categoryOptions)
   const paths = {
     paths: Object.keys(categoryOptions).map(category => ({
       params: { category: categoryOptions[category]?.name }
