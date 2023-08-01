@@ -44,7 +44,6 @@ console.log('load fukasawa_01 theme')
  * @constructor
  */
 const LayoutBase = (props) => {
-  console.log('load fukasawa_01 theme LayoutBase')
   const { children, headerSlot } = props
   const leftAreaSlot = <Live2D />
   const { onLoading } = useGlobal()
@@ -115,7 +114,6 @@ const LayoutBase = (props) => {
             * @returns 首页就是一个博客列表
             */
 const LayoutIndex = (props) => {
-  console.log('theme 首页')
   return <LayoutPostList {...props} />
 }
 
@@ -124,7 +122,6 @@ const LayoutIndex = (props) => {
  * @param {*} props
             */
 const LayoutPostList = (props) => {
-  console.log('theme 博客列表, ', props)
   return <LayoutBase {...props}>
         {BLOG.POST_LIST_STYLE === 'page' ? <BlogListPage {...props} /> : <BlogListScroll {...props} />}
     </LayoutBase>
@@ -136,7 +133,6 @@ const LayoutPostList = (props) => {
             * @returns
             */
 const LayoutSlug = (props) => {
-  console.log('theme 文章详情')
   const { lock, validPassword } = props
   return (
         <LayoutBase {...props} >
@@ -149,7 +145,6 @@ const LayoutSlug = (props) => {
  * 搜索页
  */
 const LayoutSearch = props => {
-  console.log('theme 搜索页')
   const { keyword } = props
   const router = useRouter()
   useEffect(() => {
@@ -171,7 +166,6 @@ const LayoutSearch = props => {
  * 归档页面
  */
 const LayoutArchive = (props) => {
-  console.log('theme 归档页面')
   const { archivePosts } = props
   return <LayoutBase {...props}>
         <div className="mb-10 pb-20 bg-white md:p-12 p-3 dark:bg-gray-800 shadow-md min-h-full">
@@ -202,7 +196,6 @@ const Layout404 = props => {
             * @returns
             */
 const LayoutCategoryIndex = (props) => {
-  console.log('theme 分类列表')
   const { locale } = useGlobal()
   const { categoryOptions } = props
   return (
@@ -238,7 +231,6 @@ const LayoutCategoryIndex = (props) => {
             * @returns
             */
 const LayoutTagIndex = (props) => {
-  console.log('theme 标签列表')
   const { locale } = useGlobal()
   const { tagOptions } = props
   return <LayoutBase {...props} >

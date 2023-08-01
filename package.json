@@ -34,6 +34,7 @@
     "copy-to-clipboard": "^3.3.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "feed": "^4.2.2",
+    "ioredis": "^5.3.2",
     "js-md5": "^0.7.3",
     "localStorage": "^1.0.4",
     "lodash.throttle": "^4.1.1",
@@ -56,6 +57,7 @@
     "react-notion-x": "6.16.0",
     "react-share": "^4.4.1",
     "react-tweet-embed": "~2.0.0",
+    "redis": "^4.6.7",
     "typed.js": "^2.0.12",
     "use-ackee": "^3.0.0"
   },

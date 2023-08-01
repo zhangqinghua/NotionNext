@@ -45,6 +45,9 @@
 1. 页面静态缓存，表示服务端渲染数据后，多久后才需要再次渲染。配置：NEXT_REVALIDATE_SECOND
 2. Notion API 数据缓存，服务器渲染时需要Notion的数据，这些数据先从Notion API获取，然后缓存到内存中。参考：getNotionData, cache_manager
 
+#### 解决方案
+添加了 redis_cache
+
 ## 6. 定时任务
 1. vercel.json
 2. pages/api/cron.js
