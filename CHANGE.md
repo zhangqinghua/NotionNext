@@ -36,8 +36,18 @@
 全部
 
 ## 5. 缓存
-
 #### local_file_cache
 - 文件缓存持续10分钟
 #### memory_manager.js
 - 使用文件缓存，因为内存缓存好像有并发Bug
+
+注意：有两处缓存，
+1. 页面静态缓存，表示服务端渲染数据后，多久后才需要再次渲染。配置：NEXT_PUBLIC_REVALIDATE_SECOND
+2. Notion API 数据缓存，服务器渲染时需要Notion的数据，这些数据先从Notion API获取，然后缓存到内存中。参考：getNotionData, cache_manager
+
+## 6. 定时任务
+1. vercel.json
+2. pages/api/cron.js
+
+Notion数据全部从定时任务读取，服务端渲染时直接从缓存读取数据。因为 Vercel 只支持按天的定时任务，所以需要在部署的时候手工调用一些接口 /api/cron
+后期想办法实现项目部署后，自动执行初始化数据任务
