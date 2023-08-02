@@ -25,7 +25,7 @@ const Index = props => {
  * SSG 获取数据
  * @returns
  */
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const from = 'index'
   console.log('SSG 获取数据 index.js getStaticProps start')
   const props = await getGlobalData({ from })
@@ -73,8 +73,7 @@ export async function getStaticProps() {
     props: {
       meta,
       ...props
-    },
-    revalidate: parseInt(BLOG.NEXT_REVALIDATE_SECOND)
+    }
   }
 }
 

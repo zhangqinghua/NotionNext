@@ -32,7 +32,7 @@ export default function Category(props) {
   return <Layout {...props} />
 }
 
-export async function getStaticProps({ params: { category, page } }) {
+export async function getServerSideProps({ params: { category, page } }) {
   const from = 'category-page-props'
   let props = await getGlobalData({ from })
 
@@ -49,32 +49,31 @@ export async function getStaticProps({ params: { category, page } }) {
   props = { ...props, category, page }
 
   return {
-    props,
-    revalidate: parseInt(BLOG.NEXT_REVALIDATE_SECOND)
+    props
   }
 }
 
-export async function getStaticPaths() {
-  const from = 'category-paths'
-  const { categoryOptions, allPages } = await getGlobalData({ from })
-  const paths = []
-  console.log('============================category page getStaticPaths')
+// export async function getStaticPaths() {
+//   const from = 'category-paths'
+//   const { categoryOptions, allPages } = await getGlobalData({ from })
+//   const paths = []
+//   console.log('============================category page getStaticPaths')
 
-  categoryOptions?.forEach(category => {
-    // 过滤状态类型
-    const categoryPosts = allPages.filter(page => page.type === 'Post' && page.status === 'Published').filter(post => post && post.category && post.category.includes(category.name))
-    // 处理文章页数
-    const postCount = categoryPosts.length
-    const totalPages = Math.ceil(postCount / BLOG.POSTS_PER_PAGE)
-    if (totalPages > 1) {
-      for (let i = 1; i <= totalPages; i++) {
-        paths.push({ params: { category: category.name, page: '' + i } })
-      }
-    }
-  })
-  console.log('============================category page getStaticPaths return: ', paths)
-  return {
-    paths,
-    fallback: true
-  }
-}
+//   categoryOptions?.forEach(category => {
+//     // 过滤状态类型
+//     const categoryPosts = allPages.filter(page => page.type === 'Post' && page.status === 'Published').filter(post => post && post.category && post.category.includes(category.name))
+//     // 处理文章页数
+//     const postCount = categoryPosts.length
+//     const totalPages = Math.ceil(postCount / BLOG.POSTS_PER_PAGE)
+//     if (totalPages > 1) {
+//       for (let i = 1; i <= totalPages; i++) {
+//         paths.push({ params: { category: category.name, page: '' + i } })
+//       }
+//     }
+//   })
+//   console.log('============================category page getStaticPaths return: ', paths)
+//   return {
+//     paths,
+//     fallback: true
+//   }
+// }

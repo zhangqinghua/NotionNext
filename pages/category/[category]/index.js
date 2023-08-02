@@ -32,7 +32,7 @@ export default function Category(props) {
   return <Layout {...props} />
 }
 
-export async function getStaticProps({ params: { category } }) {
+export async function getServerSideProps({ params: { category } }) {
   const from = 'category-props'
   let props = await getGlobalData({ from })
 
@@ -54,22 +54,21 @@ export async function getStaticProps({ params: { category } }) {
   props = { ...props, category }
 
   return {
-    props,
-    revalidate: parseInt(BLOG.NEXT_REVALIDATE_SECOND)
+    props
   }
 }
 
-export async function getStaticPaths() {
-  const from = 'category-paths'
-  const { categoryOptions } = await getGlobalData({ from })
-  console.log('============================category index getStaticPaths: ', categoryOptions)
-  console.log('============================category index getStaticPaths: ', categoryOptions)
-  const paths = {
-    paths: Object.keys(categoryOptions).map(category => ({
-      params: { category: categoryOptions[category]?.name }
-    })),
-    fallback: true
-  }
-  console.log('========================index.js getStaticPaths return: ', paths.paths)
-  return paths
-}
+// export async function getStaticPaths() {
+//   const from = 'category-paths'
+//   const { categoryOptions } = await getGlobalData({ from })
+//   console.log('============================category index getStaticPaths: ', categoryOptions)
+//   console.log('============================category index getStaticPaths: ', categoryOptions)
+//   const paths = {
+//     paths: Object.keys(categoryOptions).map(category => ({
+//       params: { category: categoryOptions[category]?.name }
+//     })),
+//     fallback: true
+//   }
+//   console.log('========================index.js getStaticPaths return: ', paths.paths)
+//   return paths
+// }

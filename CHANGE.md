@@ -48,6 +48,9 @@
 #### 解决方案
 添加了 redis_cache
 
+####
+将pages下面的数据，除了 prefix 目录，其它的页面都改成服务端渲染。
+
 ## 6. 定时任务
 1. vercel.json
 2. pages/api/cron.js

@@ -29,7 +29,7 @@ export default function Category(props) {
   return <Layout {...props} />
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const props = await getGlobalData({ from: 'category-index-props' })
   delete props.allPages
   return {

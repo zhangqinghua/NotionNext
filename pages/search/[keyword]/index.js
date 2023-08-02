@@ -30,7 +30,7 @@ const Index = props => {
  * @param {*} param0
  * @returns
  */
-export async function getStaticProps({ params: { keyword } }) {
+export async function getServerSideProps({ params: { keyword } }) {
   const props = await getGlobalData({
     from: 'search-props',
     pageType: ['Post']
@@ -52,15 +52,15 @@ export async function getStaticProps({ params: { keyword } }) {
   }
 }
 
-export async function getStaticPaths() {
-  console.log('============================keyword page getStaticPaths')
-  const paths = {
-    paths: [{ params: { keyword: BLOG.TITLE } }],
-    fallback: true
-  }
-  console.log('========================index.js getStaticPaths return: ', paths.paths)
-  return paths
-}
+// export async function getStaticPaths() {
+//   console.log('============================keyword page getStaticPaths')
+//   const paths = {
+//     paths: [{ params: { keyword: BLOG.TITLE } }],
+//     fallback: true
+//   }
+//   console.log('========================index.js getStaticPaths return: ', paths.paths)
+//   return paths
+// }
 
 /**
  * 将对象的指定字段拼接到字符串

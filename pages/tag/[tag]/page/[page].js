@@ -23,7 +23,7 @@ const Tag = props => {
   return <Layout {...props} />
 }
 
-export async function getStaticProps({ params: { tag, page } }) {
+export async function getServerSideProps({ params: { tag, page } }) {
   const from = 'tag-page-props'
   const props = await getGlobalData({ from })
   // 过滤状态、标签
@@ -37,33 +37,32 @@ export async function getStaticProps({ params: { tag, page } }) {
   props.page = page
   delete props.allPages
   return {
-    props,
-    revalidate: parseInt(BLOG.NEXT_REVALIDATE_SECOND)
+    props
   }
 }
 
-export async function getStaticPaths() {
-  const from = 'tag-page-static-path'
-  const { tagOptions, allPages } = await getGlobalData({ from })
-  console.log('============================tag page getStaticPaths')
-  const paths = []
-  tagOptions?.forEach(tag => {
-    // 过滤状态类型
-    const tagPosts = allPages.filter(page => page.type === 'Post' && page.status === 'Published').filter(post => post && post?.tags && post?.tags.includes(tag.name))
-    // 处理文章页数
-    const postCount = tagPosts.length
-    const totalPages = Math.ceil(postCount / BLOG.POSTS_PER_PAGE)
-    if (totalPages > 1) {
-      for (let i = 1; i <= totalPages; i++) {
-        paths.push({ params: { tag: tag.name, page: '' + i } })
-      }
-    }
-  })
-  console.log('========================index.js getStaticPaths return: ', paths.paths)
-  return {
-    paths: paths,
-    fallback: true
-  }
-}
+// export async function getStaticPaths() {
+//   const from = 'tag-page-static-path'
+//   const { tagOptions, allPages } = await getGlobalData({ from })
+//   console.log('============================tag page getStaticPaths')
+//   const paths = []
+//   tagOptions?.forEach(tag => {
+//     // 过滤状态类型
+//     const tagPosts = allPages.filter(page => page.type === 'Post' && page.status === 'Published').filter(post => post && post?.tags && post?.tags.includes(tag.name))
+//     // 处理文章页数
+//     const postCount = tagPosts.length
+//     const totalPages = Math.ceil(postCount / BLOG.POSTS_PER_PAGE)
+//     if (totalPages > 1) {
+//       for (let i = 1; i <= totalPages; i++) {
+//         paths.push({ params: { tag: tag.name, page: '' + i } })
+//       }
+//     }
+//   })
+//   console.log('========================index.js getStaticPaths return: ', paths.paths)
+//   return {
+//     paths: paths,
+//     fallback: true
+//   }
+// }
 
 export default Tag

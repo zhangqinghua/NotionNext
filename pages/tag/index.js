@@ -1,6 +1,6 @@
 import { getGlobalData } from '@/lib/notion/getNotionData'
 import { useGlobal } from '@/lib/global'
-import BLOG from '@/blog.config'
+// import BLOG from '@/blog.config'
 import { useRouter } from 'next/router'
 import { getLayoutByTheme } from '@/themes/theme'
 
@@ -28,13 +28,12 @@ const TagIndex = props => {
   return <Layout {...props} />
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const from = 'tag-index-props'
   const props = await getGlobalData({ from })
   delete props.allPages
   return {
-    props,
-    revalidate: parseInt(BLOG.NEXT_REVALIDATE_SECOND)
+    props
   }
 }
 

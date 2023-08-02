@@ -49,7 +49,7 @@ const Search = props => {
 /**
  * 浏览器前端搜索
  */
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const props = await getGlobalData({
     from: 'search-props',
     pageType: ['Post']

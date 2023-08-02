@@ -41,7 +41,7 @@ const ArchiveIndex = props => {
   return <Layout {...props} />
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const props = await getGlobalData({ from: 'archive-index' })
   // 处理分页
   props.posts = props.allPages.filter(page => page.type === 'Post' && page.status === 'Published')

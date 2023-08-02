@@ -28,23 +28,23 @@ const Page = props => {
   return <Layout {...props} />
 }
 
-export async function getStaticPaths() {
-  const from = 'page-paths'
-  const { postCount } = await getGlobalData({ from })
-  console.log('============================page page getStaticPaths')
-  const totalPages = Math.ceil(postCount / BLOG.POSTS_PER_PAGE)
-  const paths = {
-    // remove first page, we 're not gonna handle that.
-    paths: Array.from({ length: totalPages - 1 }, (_, i) => ({
-      params: { page: '' + (i + 2) }
-    })),
-    fallback: true
-  }
-  console.log('========================index.js getStaticPaths return: ', paths.paths)
-  return paths
-}
+// export async function getStaticPaths() {
+//   const from = 'page-paths'
+//   const { postCount } = await getGlobalData({ from })
+//   console.log('============================page page getStaticPaths')
+//   const totalPages = Math.ceil(postCount / BLOG.POSTS_PER_PAGE)
+//   const paths = {
+//     // remove first page, we 're not gonna handle that.
+//     paths: Array.from({ length: totalPages - 1 }, (_, i) => ({
+//       params: { page: '' + (i + 2) }
+//     })),
+//     fallback: true
+//   }
+//   console.log('========================index.js getStaticPaths return: ', paths.paths)
+//   return paths
+// }
 
-export async function getStaticProps({ params: { page } }) {
+export async function getServerSideProps({ params: { page } }) {
   const from = `page-${page}`
   const props = await getGlobalData({ from })
   const { allPages } = props

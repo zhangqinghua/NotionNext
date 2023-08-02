@@ -28,7 +28,7 @@ const Tag = props => {
   return <Layout {...props} />
 }
 
-export async function getStaticProps({ params: { tag } }) {
+export async function getServerSideProps({ params: { tag } }) {
   const from = 'tag-props'
 
   console.log('========================================================getStaticProps tag-props get data start')
@@ -52,8 +52,7 @@ export async function getStaticProps({ params: { tag } }) {
   props.tag = tag
   delete props.allPages
   return {
-    props,
-    revalidate: parseInt(BLOG.NEXT_REVALIDATE_SECOND)
+    props
   }
 }
 
@@ -62,6 +61,7 @@ export async function getStaticProps({ params: { tag } }) {
  * @returns
  * @param tags
  */
+/* eslint-disable no-unused-vars */
 function getTagNames(tags) {
   const tagNames = []
   tags.forEach(tag => {
@@ -70,20 +70,20 @@ function getTagNames(tags) {
   return tagNames
 }
 
-export async function getStaticPaths() {
-  const from = 'tag-static-path'
-  const { tagOptions } = await getGlobalData({ from })
-  console.log('============================tag [tag] getStaticPaths')
-  const tagNames = getTagNames(tagOptions)
+// export async function getStaticPaths() {
+//   const from = 'tag-static-path'
+//   const { tagOptions } = await getGlobalData({ from })
+//   console.log('============================tag [tag] getStaticPaths')
+//   const tagNames = getTagNames(tagOptions)
 
-  const paths = {
-    paths: Object.keys(tagNames).map(index => ({
-      params: { tag: tagNames[index] }
-    })),
-    fallback: true
-  }
-  console.log('========================index.js getStaticPaths return: ', paths.paths)
-  return paths
-}
+//   const paths = {
+//     paths: Object.keys(tagNames).map(index => ({
+//       params: { tag: tagNames[index] }
+//     })),
+//     fallback: true
+//   }
+//   console.log('========================index.js getStaticPaths return: ', paths.paths)
+//   return paths
+// }
 
 export default Tag
