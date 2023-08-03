@@ -33,6 +33,8 @@ export default function Category(props) {
 }
 
 export async function getServerSideProps({ params: { category, page } }) {
+  const start = new Date().getTime()
+  console.log('\n[pages/category/[category]/index.js] getServerSideProps start, category: ', category, ` page: ${page}`)
   const from = 'category-page-props'
   let props = await getGlobalData({ from })
 
@@ -48,6 +50,8 @@ export async function getServerSideProps({ params: { category, page } }) {
 
   props = { ...props, category, page }
 
+  const end = new Date().getTime()
+  console.log('[pages/category/[category]/index.js] getServerSideProps finish, 耗时：', `${end - start}ms`)
   return {
     props
   }

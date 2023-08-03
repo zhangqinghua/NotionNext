@@ -1,7 +1,7 @@
 import BLOG from '@/blog.config'
 import { getPostBlocks } from '@/lib/notion'
 import { getGlobalData } from '@/lib/notion/getNotionData'
-import { generateRss } from '@/lib/rss'
+// import { generateRss } from '@/lib/rss'
 import { generateRobotsTxt } from '@/lib/robots.txt'
 
 import { useRouter } from 'next/router'
@@ -15,9 +15,7 @@ import { getLayoutByTheme } from '@/themes/theme'
 
 const Index = props => {
   // 根据页面路径加载不同Layout文件
-  console.log('================================================Index start')
   const Layout = getLayoutByTheme(useRouter())
-  console.log('================================================Index finish')
   return <Layout {...props} />
 }
 
@@ -27,7 +25,8 @@ const Index = props => {
  */
 export async function getServerSideProps() {
   const from = 'index'
-  console.log('SSG 获取数据 index.js getStaticProps start')
+  console.log('\nSSG 获取数据 index.js getServerSideProps start')
+  const start = new Date().getTime()
   const props = await getGlobalData({ from })
   console.log('index.js getStaticProps finish')
   const { siteInfo } = props
@@ -62,13 +61,14 @@ export async function getServerSideProps() {
   generateRobotsTxt()
   // 生成Feed订阅
   if (JSON.parse(BLOG.ENABLE_RSS)) {
-    generateRss(props?.latestPosts || [])
+    // generateRss(props?.latestPosts || [])
   }
 
   // 生成全文索引 - 仅在 yarn build 时执行 && process.env.npm_lifecycle_event === 'build'
 
   delete props.allPages
-
+  const end = new Date().getTime()
+  console.log('SSG 获取数据 index.js getServerSideProps Finish, 耗时：', `${end - start}ms`)
   return {
     props: {
       meta,

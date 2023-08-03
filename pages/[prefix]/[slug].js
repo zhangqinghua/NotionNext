@@ -12,32 +12,34 @@ import { uploadDataToAlgolia } from '@/lib/algolia'
  * @returns
  */
 const PrefixSlug = props => {
-  console.log('============================PrefixSlug start')
   return <Slug {...props}/>
 }
 
-export async function getStaticPaths() {
-  console.log('============================slug getStaticPaths')
-  if (!BLOG.isProd) {
-    return {
-      paths: [],
-      fallback: true
-    }
-  }
+// export async function getStaticPaths() {
+//   console.log('============================slug getStaticPaths')
+//   if (!BLOG.isProd) {
+//     return {
+//       paths: [],
+//       fallback: true
+//     }
+//   }
 
-  const from = 'slug-paths'
-  const { allPages } = await getGlobalData({ from })
-  console.log('========================slug.js slug-paths')
-  const paths = {
-    paths: allPages?.filter(row => row.slug.indexOf('/') > 0).map(row => ({ params: { prefix: row.slug.split('/')[0], slug: row.slug.split('/')[1] } })),
-    fallback: true
-  }
+//   const from = 'slug-paths'
+//   const { allPages } = await getGlobalData({ from })
+//   console.log('========================slug.js slug-paths')
+//   const paths = {
+//     paths: allPages?.filter(row => row.slug.indexOf('/') > 0).map(row => ({ params: { prefix: row.slug.split('/')[0], slug: row.slug.split('/')[1] } })),
+//     fallback: true
+//   }
 
-  console.log('========================slug.js slug-paths return: ', paths.paths)
-  return paths
-}
+//   console.log('========================slug.js slug-paths return: ', paths.paths)
+//   return paths
+// }
 
-export async function getStaticProps({ params: { prefix, slug } }) {
+export async function getServerSideProps({ params: { prefix, slug } }) {
+  const start = new Date().getTime()
+  console.log('\n[pages/[prefix]/[slug].js] getServerSideProps start,', ` prefix: ${prefix}, slug: ${slug}`)
+
   let fullSlug = prefix + '/' + slug
   if (JSON.parse(BLOG.PSEUDO_STATIC)) {
     if (!fullSlug.endsWith('.html')) {
@@ -62,8 +64,11 @@ export async function getStaticProps({ params: { prefix, slug } }) {
 
   // 无法获取文章
   if (!props?.post) {
+    const end = new Date().getTime()
+    console.log('[pages/[prefix]/[slug].js] getServerSideProps finish, 无法获取文章, 耗时: ', `${end - start}ms`)
+
     props.post = null
-    return { props, revalidate: parseInt(BLOG.NEXT_REVALIDATE_SECOND) }
+    return { props }
   }
 
   // 文章内容加载
@@ -90,9 +95,10 @@ export async function getStaticProps({ params: { prefix, slug } }) {
   }
 
   delete props.allPages
+  const end = new Date().getTime()
+  console.log('[pages/[prefix]/[slug].js] getServerSideProps finish, 耗时: ', `${end - start}ms`)
   return {
-    props,
-    revalidate: parseInt(BLOG.NEXT_REVALIDATE_SECOND)
+    props
   }
 }
 
