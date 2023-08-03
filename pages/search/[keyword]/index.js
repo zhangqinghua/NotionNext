@@ -47,8 +47,7 @@ export async function getServerSideProps({ params: { keyword } }) {
   }
   props.keyword = keyword
   return {
-    props,
-    revalidate: parseInt(BLOG.NEXT_REVALIDATE_SECOND)
+    props
   }
 }
 

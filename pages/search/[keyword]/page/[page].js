@@ -45,8 +45,7 @@ export async function getServerSideProps({ params: { keyword, page } }) {
   props.page = page
   delete props.allPages
   return {
-    props,
-    revalidate: parseInt(BLOG.NEXT_REVALIDATE_SECOND)
+    props
   }
 }
 

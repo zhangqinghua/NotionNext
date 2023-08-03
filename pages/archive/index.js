@@ -1,7 +1,7 @@
 import { getGlobalData } from '@/lib/notion/getNotionData'
 import { useEffect } from 'react'
 import { useGlobal } from '@/lib/global'
-import BLOG from '@/blog.config'
+// import BLOG from '@/blog.config'
 import { useRouter } from 'next/router'
 import { getLayoutByTheme } from '@/themes/theme'
 import { isBrowser } from '@/lib/utils'
@@ -68,8 +68,7 @@ export async function getServerSideProps() {
   delete props.allPages
 
   return {
-    props,
-    revalidate: parseInt(BLOG.NEXT_REVALIDATE_SECOND)
+    props
   }
 }
 

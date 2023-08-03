@@ -1,7 +1,7 @@
 import { getGlobalData } from '@/lib/notion/getNotionData'
 import { useGlobal } from '@/lib/global'
 import { useRouter } from 'next/router'
-import BLOG from '@/blog.config'
+// import BLOG from '@/blog.config'
 import { getLayoutByTheme } from '@/themes/theme'
 
 /**
@@ -57,8 +57,7 @@ export async function getServerSideProps() {
   const { allPages } = props
   props.posts = allPages.filter(page => page.type === 'Post' && page.status === 'Published')
   return {
-    props,
-    revalidate: parseInt(BLOG.NEXT_REVALIDATE_SECOND)
+    props
   }
 }
 
