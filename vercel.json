@@ -4,6 +4,6 @@
   "headers": [],
   "crons": [{
     "path": "/api/cron",
-    "schedule": "45 20 * * *"
+    "schedule": "50 00 * * *"
   }]
 }
