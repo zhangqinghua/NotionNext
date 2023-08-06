@@ -7,7 +7,7 @@ import LazyImage from '@/components/LazyImage'
 import { formatDateFmt } from '@/lib/formatDate'
 import TwikooCommentCount from '@/components/TwikooCommentCount'
 
-// 1001010: 文章列表采用matery主题，并且对分类进行居中
+// 1001010: 文章列表采用matery主题，并且对分类进行居中，非固定图片高度
 const BlogCard = ({ index, post, showSummary, siteInfo }) => {
     const showPreview = CONFIG.POST_LIST_PREVIEW && post.blockMap
     // matery 主题默认强制显示图片
@@ -26,7 +26,7 @@ const BlogCard = ({ index, post, showSummary, siteInfo }) => {
               className="w-full mb-4 overflow-hidden shadow-md border dark:border-black rounded-xl bg-white dark:bg-hexo-black-gray">
   
               {/* 固定高度 ，空白用图片拉升填充 */}
-              <div className="group flex flex-col h-80 justify-between">
+              <div className="group flex flex-col justify-between">
   
                   {/* 头部图片 填充卡片 */}
                   {showPageCover && (
