@@ -42,7 +42,7 @@
 
 /* 给所有的标题加个下活线 */
 .notion-h {
-    border-bottom-width: 1 !important;
+    border-bottom-width: medium !important;
 }
 
 /* 取消H1标题的下划线，因为重复了。 */
@@ -68,5 +68,5 @@
 
 /* 嵌套 ul 就不要缩进了*/
 ul ul {
-    padding-inline-start: medium !important;
+    padding-inline-start: initial !important;
 }
