@@ -2,77 +2,100 @@ import BLOG from '@/blog.config'
 import Link from 'next/link'
 import TagItemMini from './TagItemMini'
 import React from 'react'
-import CONFIG_FUKA from '../config'
+import CONFIG from '../config'
 import LazyImage from '@/components/LazyImage'
+import { formatDateFmt } from '@/lib/formatDate'
+import TwikooCommentCount from '@/components/TwikooCommentCount'
 
 const BlogCard = ({ index, post, showSummary, siteInfo }) => {
-  const showPreview = CONFIG_FUKA.POST_LIST_PREVIEW && post.blockMap
-  // fukasawa 强制显示图片
-  if (CONFIG_FUKA.POST_LIST_COVER_FORCE && post && !post.pageCover) {
-    post.pageCoverThumbnail = siteInfo?.pageCover
+    const showPreview = CONFIG.POST_LIST_PREVIEW && post.blockMap
+    // matery 主题默认强制显示图片
+    if (post && !post.pageCoverThumbnail) {
+      post.pageCoverThumbnail = siteInfo?.pageCover
+    }
+    const showPageCover = CONFIG.POST_LIST_COVER && post?.pageCoverThumbnail
+    const delay = (index % 3) * 300
+    return (
+          <div
+              data-aos="zoom-in"
+              data-aos-duration="500"
+              data-aos-delay={delay}
+              data-aos-once="true"
+              data-aos-anchor-placement="top-bottom"
+              className="w-full mb-4 overflow-hidden shadow-md border dark:border-black rounded-xl bg-white dark:bg-hexo-black-gray">
+  
+              {/* 固定高度 ，空白用图片拉升填充 */}
+              <div className="group flex flex-col h-80 justify-between">
+  
+                  {/* 头部图片 填充卡片 */}
+                  {showPageCover && (
+                      <Link href={`${BLOG.SUB_PATH}/${post.slug}`} passHref legacyBehavior>
+                          <div className="flex flex-grow w-full relative duration-200 = rounded-t-md cursor-pointer transform overflow-hidden">
+                              <LazyImage
+                                  src={post?.pageCoverThumbnail}
+                                  alt={post.title}
+                                  className="h-full w-full group-hover:scale-125 group-hover:brightness-50 brightness-90 rounded-t-md transform object-cover duration-500"
+                              />
+                              <div className='absolute bottom-0 left-0 text-white p-6 text-2xl replace break-words w-full shadow-text'>{post.title}</div>
+                          </div>
+                      </Link>
+                  )}
+  
+                  {/* 文字描述 */}
+                  <div >
+                      {/* 描述 */}
+                      <div className="px-4 flex flex-col w-full  text-gray-700  dark:text-gray-300">
+  
+                          {(!showPreview || showSummary) && post.summary && (
+                              <p style={{ overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: '4', WebkitBoxOrient: 'vertical' }}
+                                  className="replace my-2 text-sm font-light leading-7">
+                                  {post.summary}
+                              </p>
+                          )}
+  
+                          <div className='text-gray-800 justify-between flex my-2  dark:text-gray-300'>
+                              <div>
+                                  <Link
+                                      href={`/archive#${formatDateFmt(post?.publishDate, 'yyyy-MM')}`}
+                                      passHref
+                                      className="font-light hover:underline cursor-pointer text-sm leading-4 mr-3">
+  
+                                      <i className="far fa-clock mr-1" />
+                                      {post.date?.start_date || post.lastEditedDay}
+  
+                                  </Link>
+                                  <TwikooCommentCount post={post} className='hover:underline cursor-pointer text-sm'/>
+                              </div>
+                              <Link style={{margin: 'auto 0'}}
+                                  href={`/category/${post.category}`}
+                                  passHref
+                                  className="cursor-pointer font-light text-sm hover:underline hover:text-indigo-700 dark:hover:text-indigo-400 transform">
+  
+                                  <i className="mr-1 far fa-folder" />
+                                  {post.category}
+  
+                              </Link>
+                          </div>
+                      </div>
+  
+                      {post?.tagItems && post?.tagItems.length > 0 && (<>
+                          <hr />
+                          <div className="text-gray-400 justify-between flex px-5 py-3">
+                              <div className="md:flex-nowrap flex-wrap md:justify-start inline-block">
+                                  <div>
+                                      {' '}
+                                      {post.tagItems.map(tag => (
+                                          <TagItemMini key={tag.name} tag={tag} />
+                                      ))}
+                                  </div>
+                              </div>
+                          </div>
+                      </>)}
+                  </div>
+              </div>
+  
+          </div>
+    )
   }
-  const showPageCover = CONFIG_FUKA.POST_LIST_COVER && post?.pageCoverThumbnail
-
-  return (
-        <div
-            data-aos="fade-up"
-            data-aos-duration="600"
-            data-aos-once="true"
-            data-aos-anchor-placement="top-bottom"
-            style={{ maxHeight: '60rem' }}
-            className="w-full lg:max-w-sm p-3 shadow mb-4 mx-2 bg-white dark:bg-hexo-black-gray hover:shadow-lg duration-200"
-        >
-            <div className="flex flex-col justify-between h-full">
-                {/* 封面图 */}
-                {showPageCover && (
-                    <div className="flex-grow mb-3 w-full duration-200 cursor-pointer transform overflow-hidden">
-                        <Link href={`${BLOG.SUB_PATH}/${post.slug}`} passHref legacyBehavior>
-                            <LazyImage
-                                src={post?.pageCoverThumbnail}
-                                alt={post?.title || BLOG.TITLE}
-                                className="object-cover w-full h-full hover:scale-125 transform duration-500"
-                            />
-                        </Link>
-                    </div>
-                )}
-
-                {/* 文字部分 */}
-                <div className="flex flex-col w-full">
-                    <Link passHref href={`${BLOG.SUB_PATH}/${post.slug}`}
-                         className={`break-words cursor-pointer font-bold hover:underline text-xl ${showPreview ? 'justify-center' : 'justify-start'} leading-tight text-gray-700 dark:text-gray-100 hover:text-blue-500 dark:hover:text-blue-400`}
-                    >
-                        {post.title}
-                    </Link>
-
-                    {(!showPreview || showSummary) && (
-                        <p className="my-2 tracking-wide line-clamp-3 text-gray-800 dark:text-gray-300 text-md font-light leading-6">
-                            {post.summary}
-                        </p>
-                    )}
-
-                    {/* 分类标签 */}
-                    <div className="mt-auto justify-between flex">
-                        {post.category && <Link
-                            href={`/category/${post.category}`}
-                            passHref
-                            className="cursor-pointer dark:text-gray-300 font-light text-sm hover:underline hover:text-indigo-700 dark:hover:text-indigo-400 transform"
-                        >
-                            <i className="mr-1 far fa-folder" />
-                            {post.category}
-                        </Link>}
-                        <div className="md:flex-nowrap flex-wrap md:justify-start inline-block">
-                            <div>
-
-                                {post.tagItems.map((tag) => (
-                                    <TagItemMini key={tag.name} tag={tag} />
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-  )
-}
 
 export default BlogCard
