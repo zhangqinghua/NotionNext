@@ -7,6 +7,7 @@ import LazyImage from '@/components/LazyImage'
 import { formatDateFmt } from '@/lib/formatDate'
 import TwikooCommentCount from '@/components/TwikooCommentCount'
 
+// 1001010: 文章列表采用matery主题，并且对分类进行居中
 const BlogCard = ({ index, post, showSummary, siteInfo }) => {
     const showPreview = CONFIG.POST_LIST_PREVIEW && post.blockMap
     // matery 主题默认强制显示图片
