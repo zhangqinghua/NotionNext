@@ -26,7 +26,7 @@ font-family: cnfont, enfont;
 }
 
 /* 限制普通字体不要太黑 */
-/* #container .notion-text {
+#container .notion-text {
     color: #1b1b1b;
 }
 #container .notion-simple-table {
@@ -34,11 +34,12 @@ font-family: cnfont, enfont;
 }
 #container .notion-list {
     color: #1b1b1b;
-} */
+}
+
 /* 兼容cnfont，部分字符无法使用font-weight */
-/* .font-light {
+.font-light {
     font-weight: unset;
-} */
+}
 
 /* 给所有的标题加个下活线 */
 /* .notion-h {
@@ -60,16 +61,16 @@ font-family: cnfont, enfont;
 }
 
 /* 给代码框加上阴影 */
-/* .notion .notion-code {
+.notion .notion-code {
     box-shadow: 3px 3px 5px 0px #ccc;
-} */
+}
 
 /* 给代码框微调 */
-/* .code-toolbar {
+.code-toolbar {
     margin-top: 0.25rem !important;
-} */
+}
 
 /* 嵌套 ul 就不要缩进了*/
-/* ul ul {
+ul ul {
     padding-inline-start: initial !important;
-} */
+}
