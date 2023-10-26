@@ -6,3 +6,70 @@
 .fa-info:before {
     content: "\f05a";
 }
+
+/* 自定义中文字体 */
+@font-face {
+  font-family: cnfont;
+  src: url('../font/CircularBody.woff');
+  unicode-range: U+1000-999999;
+}
+
+/* ASSI字符使用英文字体 */
+@font-face {
+  font-family: enfont;
+  src: url('https://cdn.bootcdn.net/ajax/libs/Iosevka/5.0.0-beta.1/iosevka/ttf/iosevka-regular.ttf');
+}
+
+/* 要中英文字体对齐，只能通过js，把中文标记上 <span clss="chinese">中文</span>，然后在 .chinese{间隔}*/
+* {
+font-family: cnfont, enfont;
+}
+
+/* 限制普通字体不要太黑 */
+/* #container .notion-text {
+    color: #1b1b1b;
+}
+#container .notion-simple-table {
+    color: #1b1b1b;
+}
+#container .notion-list {
+    color: #1b1b1b;
+} */
+/* 兼容cnfont，部分字符无法使用font-weight */
+/* .font-light {
+    font-weight: unset;
+} */
+
+/* 给所有的标题加个下活线 */
+/* .notion-h {
+    border-bottom-width: medium !important;
+} */
+
+/* 取消H1标题的下划线，因为重复了。 */
+/* .notion-h1 {
+    border-bottom-width: 0 !important;
+} */
+
+/* 图片默认100%宽度*/
+.notion-asset-wrapper-image > div {
+    width: 100% !important;
+}
+.notion-asset-wrapper img {
+    width: 100% !important;
+    box-shadow: 3px 3px 5px 0px #ccc;
+}
+
+/* 给代码框加上阴影 */
+/* .notion .notion-code {
+    box-shadow: 3px 3px 5px 0px #ccc;
+} */
+
+/* 给代码框微调 */
+/* .code-toolbar {
+    margin-top: 0.25rem !important;
+} */
+
+/* 嵌套 ul 就不要缩进了*/
+/* ul ul {
+    padding-inline-start: initial !important;
+} */
