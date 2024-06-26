@@ -1,9 +1,8 @@
-import { getGlobalData } from '@/lib/notion/getNotionData'
-import React from 'react'
-import { useGlobal } from '@/lib/global'
 import BLOG from '@/blog.config'
-import { useRouter } from 'next/router'
+import { siteConfig } from '@/lib/config'
+import { getGlobalData } from '@/lib/db/getSiteData'
 import { getLayoutByTheme } from '@/themes/theme'
+import { useRouter } from 'next/router'
 
 /**
  * 分类页
@@ -12,72 +11,77 @@ import { getLayoutByTheme } from '@/themes/theme'
  */
 
 export default function Category(props) {
-  const { siteInfo } = props
-  const { locale } = useGlobal()
   // 根据页面路径加载不同Layout文件
-  const Layout = getLayoutByTheme(useRouter())
-
-  const meta = {
-    title: `${props.category} | ${locale.COMMON.CATEGORY} | ${
-      siteInfo?.title || ''
-    }`,
-    description: siteInfo?.description,
-    slug: 'category/' + props.category,
-    image: siteInfo?.pageCover,
-    type: 'website'
-  }
-
-  props = { ...props, meta }
+  const Layout = getLayoutByTheme({
+    theme: siteConfig('THEME'),
+    router: useRouter()
+  })
 
   return <Layout {...props} />
 }
 
-export async function getServerSideProps({ params: { category, page } }) {
-  const start = new Date().getTime()
-  console.log('\n[pages/category/[category]/index.js] getServerSideProps start, category: ', category, ` page: ${page}`)
+export async function getStaticProps({ params: { category, page } }) {
   const from = 'category-page-props'
   let props = await getGlobalData({ from })
 
   // 过滤状态类型
-  props.posts = props.allPages.filter(page => page.type === 'Post' && page.status === 'Published').filter(post => post && post.category && post.category.includes(category))
+  props.posts = props.allPages
+    ?.filter(page => page.type === 'Post' && page.status === 'Published')
+    .filter(post => post && post.category && post.category.includes(category))
   // 处理文章页数
   props.postCount = props.posts.length
+  const POSTS_PER_PAGE = siteConfig('POSTS_PER_PAGE', 12, props?.NOTION_CONFIG)
   // 处理分页
-  props.posts = props.posts.slice(BLOG.POSTS_PER_PAGE * (page - 1), BLOG.POSTS_PER_PAGE * page)
+  props.posts = props.posts.slice(
+    POSTS_PER_PAGE * (page - 1),
+    POSTS_PER_PAGE * page
+  )
 
   delete props.allPages
   props.page = page
 
   props = { ...props, category, page }
 
-  const end = new Date().getTime()
-  console.log('[pages/category/[category]/index.js] getServerSideProps finish, 耗时：', `${end - start}ms`)
   return {
-    props
+    props,
+    revalidate: process.env.EXPORT
+      ? undefined
+      : siteConfig(
+          'NEXT_REVALIDATE_SECOND',
+          BLOG.NEXT_REVALIDATE_SECOND,
+          props.NOTION_CONFIG
+        )
   }
 }
 
-// export async function getStaticPaths() {
-//   const from = 'category-paths'
-//   const { categoryOptions, allPages } = await getGlobalData({ from })
-//   const paths = []
-//   console.log('============================category page getStaticPaths')
+export async function getStaticPaths() {
+  const from = 'category-paths'
+  const { categoryOptions, allPages, NOTION_CONFIG } = await getGlobalData({
+    from
+  })
+  const paths = []
 
-//   categoryOptions?.forEach(category => {
-//     // 过滤状态类型
-//     const categoryPosts = allPages.filter(page => page.type === 'Post' && page.status === 'Published').filter(post => post && post.category && post.category.includes(category.name))
-//     // 处理文章页数
-//     const postCount = categoryPosts.length
-//     const totalPages = Math.ceil(postCount / BLOG.POSTS_PER_PAGE)
-//     if (totalPages > 1) {
-//       for (let i = 1; i <= totalPages; i++) {
-//         paths.push({ params: { category: category.name, page: '' + i } })
-//       }
-//     }
-//   })
-//   console.log('============================category page getStaticPaths return: ', paths)
-//   return {
-//     paths,
-//     fallback: true
-//   }
-// }
+  categoryOptions?.forEach(category => {
+    // 过滤状态类型
+    const categoryPosts = allPages
+      ?.filter(page => page.type === 'Post' && page.status === 'Published')
+      .filter(
+        post => post && post.category && post.category.includes(category.name)
+      )
+    // 处理文章页数
+    const postCount = categoryPosts.length
+    const totalPages = Math.ceil(
+      postCount / siteConfig('POSTS_PER_PAGE', 12, NOTION_CONFIG)
+    )
+    if (totalPages > 1) {
+      for (let i = 1; i <= totalPages; i++) {
+        paths.push({ params: { category: category.name, page: '' + i } })
+      }
+    }
+  })
+
+  return {
+    paths,
+    fallback: true
+  }
+}
